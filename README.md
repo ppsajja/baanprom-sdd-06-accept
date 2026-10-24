@@ -1,26 +1,27 @@
-# baanprom-sdd-05-ai
+# baanprom-sdd-06-accept
 
 repo ตัวอย่างของรายวิชา 517511-266 Requirement Engineering (AI-Native RE)
 ภาควิชาคอมพิวเตอร์ คณะวิทยาศาสตร์ มหาวิทยาลัยศิลปากร
 
-เคส: บ้านพร้อม (แพลตฟอร์มจองช่างซ่อมบ้าน) มี 3 feature คือ UC-07 จองงานบริการซ่อมบำรุง UC-09 ช่างอัปเดตสถานะงาน และ UC-08 ลูกค้ายกเลิกการจองและรับเงินคืน
+เคส: บ้านพร้อม (แพลตฟอร์มจองช่างซ่อมบ้าน) มี 4 feature คือ UC-07 จองงานบริการซ่อมบำรุง UC-09 ช่างอัปเดตสถานะงาน UC-08 ลูกค้ายกเลิกการจองและรับเงินคืน และ UC-14 ผู้ช่วยตอบคำถามลูกค้าและเลื่อนนัด (ส่วนแรกของระบบที่มี AI อยู่ข้างใน)
 ข้อมูลทั้งหมดในเคสนี้เป็นข้อมูลสมมติเพื่อการสอน
 
 ## repo นี้คืออะไร
 
-repo นี้คือสภาพงานของกลุ่มตัวอย่าง (กลุ่ม X) หลังรอบ Failure Day และหลังเจ้าของอนุมัติข้อกำหนดของรอบนั้น
-มี 2 commit ที่อ่านแยกกันได้
+repo นี้คือสภาพงานของกลุ่มตัวอย่าง (กลุ่ม X) หลังบทเรียน Data, AI และ Agent และหลังเจ้าของอนุมัติข้อกำหนดของผู้ช่วย
+ต่อจาก baanprom-sdd-05-ai (ประวัติ commit ของ repo 05 อยู่ครบใน repo นี้) และเพิ่ม 2 commit ที่อ่านแยกกันได้
 
-- commit ที่ 1 "Failure Day: CR-07 และข้อกำหนดข้ามระบบ (Proposed)" คือสิ่งที่บทเรียน Operational, Security และ Privacy ทำในห้อง: ทบทวนเหตุการณ์ A B C แล้วเขียนข้อกำหนดข้ามทุก feature 9 ข้อเป็น CR-07 สถานะ Proposed พร้อม MU-01 ตาราง STRIDE ร่าง runbook และ quality-requirements.md ของ 003 กับ 004 ยังไม่มีโค้ดเปลี่ยน
-- commit ที่ 2 "CR-07 อนุมัติ: implement และ Baseline B3" คือสิ่งที่ทีม SDD จริงทำต่อหลังบทเรียน: ประชุมทบทวนกับเจ้าของเรื่อง (EV-045) ตอบคำถามเปิด 11 ข้อ อนุมัติ CR-07 พร้อมการแก้ 7 เรื่อง แก้ plan เพิ่ม task ต่อท้าย implement ทุกข้อที่เป็นโค้ดได้ รัน test ทั้งชุด แล้วประกาศ Baseline B3
+- commit ที่ 1 "Data, AI และ Agent: ข้อกำหนดผู้ช่วย AI บนกระดาษ (CR-09 Proposed)" คือสิ่งที่ Studio ของบทเรียนทำในห้อง: วาดเส้นแบ่งกฎกับ AI เขียน REQ-DAT-010 REQ-AI พฤติกรรม 5 กลุ่ม REQ-AI ของ agent 4 เรื่อง เป็นธรรม โปร่งใส กำกับ แผน V&V และ eval set 10 ข้อแรก แล้วเสนอเป็น CR-09 ยังไม่มีโค้ด
+- commit ที่ 2 "CR-09 อนุมัติ: ผู้ช่วย AI (MockLLM) eval และ Baseline B4" คือสิ่งที่ทีม SDD จริงทำต่อหลังบทเรียน: ประชุมทบทวนกับเจ้าของเรื่อง (EV-047) ตอบคำถามเปิด 9 ข้อ /plan /tasks /implement ขยาย eval set เป็น 290 ข้อ รัน test และ eval จริง แล้วประกาศ Baseline B4
 
-ในห้องเรียนบทนี้ไม่มี /implement (หน้าบทเรียนบอกไว้) commit ที่ 2 จึงเป็นเฉลยแบบ "ทำจนจบจริง" ไว้ให้เทียบ ไม่ใช่งานที่ต้องทำในห้องเรียน
-คำตอบของเจ้าของเรื่องในประชุม EV-045 เป็นข้อมูลสมมติ สร้างขึ้นเพื่อให้ชุด repo ต่อเนื่อง ตัวเลขทุกตัวตรงกับที่ทีมเสนอใน CR-07 และหน้าบทเรียน
+ในห้องเรียนบทนี้ไม่เปิดเครื่อง (หน้าบทเรียนบอกไว้) commit ที่ 2 จึงเป็นเฉลยแบบ "ทำจนจบจริง" ไว้ให้เทียบ
+คำตอบของเจ้าของเรื่องในประชุม EV-047 เป็นข้อมูลสมมติ สร้างขึ้นเพื่อให้ชุด repo ต่อเนื่อง ตัวเลขทุกตัวตรงกับที่หน้าบทเรียนเสนอ
+เลข CR ข้ามจาก CR-07 เป็น CR-09 เพราะหน้าบทเรียน RE in One Line และการตรวจรับ ใช้ CR-08 เป็นตัวอย่างสมมติ ("ลูกค้าเลือกช่างคนเดิมได้")
 
 ## ใช้เริ่มบทเรียนไหน และเป็นเฉลยของบทไหน
 
-- ใช้เริ่มบทเรียน **Data, AI และ Agent**
-- เป็นเฉลยของบทเรียน **Operational, Security และ Privacy** (commit ที่ 1 คือเฉลยของ Studio Failure Day commit ที่ 2 คือการทำต่อจนเข้า Baseline)
+- ใช้เริ่มบทเรียน **RE in One Line และการตรวจรับ**
+- เป็นเฉลยของบทเรียน **Data, AI และ Agent** (commit ที่ 1 คือเฉลยของ Studio commit ที่ 2 คือการทำต่อจนเข้า Baseline)
 
 ## ชุด repo ทั้ง 8
 
@@ -32,60 +33,62 @@ repo นี้คือสภาพงานของกลุ่มตัวอ
 | 02 | baanprom-sdd-02-build | AI Build from Spec |
 | 03 | baanprom-sdd-03-vv | Verification, Validation และ Change |
 | 04 | baanprom-sdd-04-ops | Operational, Security และ Privacy |
-| 05 | baanprom-sdd-05-ai (repo นี้) | Data, AI และ Agent |
-| 06 | baanprom-sdd-06-accept | RE in One Line และการตรวจรับ |
-| 07 | baanprom-sdd-07 (ชื่อเต็มประกาศพร้อม repo) | บทเสริม การตรวจรับและการส่งมอบ |
-| 08 | baanprom-sdd-08 (ชื่อเต็มประกาศพร้อม repo) | สภาพสุดท้ายหลังจบวิชา |
+| 05 | baanprom-sdd-05-ai | Data, AI และ Agent |
+| 06 | baanprom-sdd-06-accept (repo นี้) | RE in One Line และการตรวจรับ |
+| 07 | baanprom-sdd-07-r1-done | บทเสริม การตรวจรับและการส่งมอบ |
+| 08 | baanprom-sdd-08-complete | สภาพสุดท้ายหลังจบวิชา |
 
-## อะไรใหม่เมื่อเทียบกับ repo ก่อนหน้า (baanprom-sdd-04-ops)
+## อะไรใหม่เมื่อเทียบกับ repo ก่อนหน้า (baanprom-sdd-05-ai)
 
-commit ที่ 1 (งานรอบ Failure Day ทุกไฟล์เป็นร่างที่ AI ทำแทนทีม prompt-log.md #68)
+commit ที่ 1 (งาน Studio บนกระดาษ AI จัดรูปเป็นไฟล์ prompt-log.md #73)
 
 | ไฟล์ | สิ่งที่เพิ่มหรือแก้ | เพราะอะไร |
 |---|---|---|
-| specs/002-booking/changes/CR-07.md | ไฟล์ใหม่ สถานะ Proposed ข้อกำหนดข้ามทุก feature 9 ข้อ คำถาม Q-38 ถึง Q-47 ภาคผนวก MU-01 และ STRIDE TH-01 ถึง TH-11 | ทั้ง 3 เหตุการณ์ "ไม่มี REQ ข้อไหนผิด" แต่สเปกไม่เคยพูดถึงวันแบบนี้ |
-| specs/000-shared/constraints.md | รุ่น 1.1 ร่าง เพิ่มส่วน 6 (REQ-OP-001, 005 ถึง 007, REQ-QA-010, REQ-SEC-010, 011, REQ-PRV-010, REQ-CMP-001) | ข้อกำหนดที่ "ลบ feature ทิ้งแล้วยังต้องอยู่" ต้องอยู่ไฟล์กลาง |
-| docs/srs/operations.md | ไฟล์ใหม่ ร่าง runbook 3 เหตุการณ์ | REQ-OP-006 |
-| specs/003-job-status/, specs/004-cancel-refund/quality-requirements.md | ไฟล์ใหม่ QAS 3 ข้อต่อ feature และ AC ที่เสนอ | ทำให้ "เร็ว" "ทน" ของสอง feature วัดได้ |
-| plan.md ของ 3 feature, spec.md ของ 003 และ 004 ส่วน 9, catalogue.md, baseline.md | เพิ่มแถว "รอ CR-07" และ Q ใหม่ | ให้ Impact Analysis มองเห็นก่อนอนุมัติ |
+| specs/005-ai-assistant/ | feature ใหม่ ชุดไฟล์เดียวกับ 002 ถึง 004 (spec 0.1, ai-assistant.feature AC-14-01 ถึง 16, rules.md BR-06 ร่าง, models.md, quality-requirements.md แผน V&V, gaps.md GAP-29) เพิ่ม eval/ และ prompts/ ตามหน้าบทเรียนหัวข้อ 9.2 | ข้อกำหนด AI ใช้โครงสเปกเดิม เพิ่มแค่ eval set กับข้อความสั่งที่มีรุ่น |
+| specs/005-ai-assistant/eval/qa.jsonl | 10 ข้อแรก E-001 ถึง E-010 (6 ข้อจากตารางในหน้าบทเรียน) | Studio ช่วงที่ 2 |
+| specs/005-ai-assistant/changes/CR-09.md | ใหม่ สถานะ Proposed คำถาม Q-55 ถึง Q-63 ตาราง OWASP Top 10 for LLM Applications 2026 และ Agentic Applications 2026 | นำผู้ช่วยเข้าสู่การพิจารณา |
+| docs/srs/UC-14.md | use case fully dressed ร่าง | UC ใหม่เลขถัดจาก UC-13 |
+| specs/000-shared/constraints.md | รุ่น 1.2 ร่าง ส่วน 7 "AI" (หลักกลาง 5 ข้อ REQ-AI-021, REQ-AI-022) | ข้อที่ "ลบ feature ผู้ช่วยทิ้งแล้วยังต้องอยู่" ไปไฟล์กลาง |
+| docs/srs/catalogue.md, baseline.md | แถว Proposed 14 ข้อ EV-046 แถว CR-09 | ให้ Impact Analysis มองเห็นก่อนอนุมัติ |
 
 commit ที่ 2 (หลังอนุมัติ)
 
 | ไฟล์ | สิ่งที่เพิ่มหรือแก้ | เพราะอะไร |
 |---|---|---|
-| specs/002-booking/changes/CR-07.md | Approved 24 ต.ค. 2569 เพิ่มบันทึกประชุมทบทวน (คำตอบ Q-25, Q-38 ถึง Q-47) การแก้ 7 เรื่อง ตาราง test เดิมที่เปลี่ยน และผล walkthrough | การอนุมัติต้องมีเหตุผลและผู้ตัดสินบันทึกไว้ |
-| specs/000-shared/constraints.md | รุ่น 1.1 Approved 10 ข้อ (เพิ่ม REQ-SEC-012) REQ-SEC-010 เพิ่มบรรทัดที่ 3 และ 4 ตัดป้าย Q ที่ตอบแล้ว ผลการตรวจโดยฝ่ายกฎหมาย (SH-05) | ประชุมไล่ OWASP API Security Top 10 2023 แล้วพบช่องที่ยังไม่มี REQ |
-| specs/000-shared/cross-cutting.feature, ac-results.md, rtm.md, gaps.md, test-run.txt, test-run-cr07-round1.txt | ไฟล์ใหม่ AC-00-01 ถึง 08 ผลรันจริงทั้งโครงการ GAP-21 ถึง GAP-28 | ข้อกำหนดข้ามทุก feature ต้องมี AC และผลตรวจของตัวเอง |
-| docs/srs/catalogue.md, baseline.md | catalogue v1.4 (10 ข้อ Approved, EV-045) Baseline B3 พร้อมตาราง "B3 ต่างจาก B2 อย่างไร" และกติกาข้อ 8, 9 | ประกาศ Baseline ใหม่ |
-| docs/srs/operations.md | runbook ฉบับใช้จริงรุ่น 1.0: 5 เหตุการณ์ เครื่องมือของคนเวร สำรองและกู้คืน บัญชี endpoint แผนเก็บหลักฐาน | Ops lead รับเป็นเจ้าของ walkthrough ผ่าน |
-| specs/*/spec.md, *.feature | 002 รุ่น 1.5 (AC-07-12 ถึง 18) 003 รุ่น 1.1 (AC-09-06 แก้ AC-09-11 ถึง 14) 004 รุ่น 1.1 (AC-08-07 ถึง 10) ทุกตัวอ้าง Constraint กลางรุ่น 1.1 | CR-07 อนุมัติ |
-| specs/*/plan.md, tasks.md | แก้เฉพาะตารางข้อ 5 และเพิ่มข้อ 9 task ต่อท้าย (002 T-17 ถึง 27, 003 T-08 ถึง 12, 004 T-07 ถึง 11) | ไม่รัน /plan และ /tasks ใหม่ทั้งไฟล์ |
-| specs/*/ac-results.md, rtm.md, quality-requirements.md | รอบ CR-07 และแถวใหม่ | ผลรันทั้งชุดหลังเปลี่ยน |
-| backend/app/ops/ | ใหม่: audit.py (403 และบันทึก) metrics.py alerts.py guard.py router.py (/health /ready /metrics) backup.py scheduler.py | REQ-SEC-010, REQ-OP-001, 005, 007, REQ-SEC-012 |
-| backend/app/erasure/ | ใหม่: คำขอลบข้อมูลลูกค้า ทะเบียนคำขอลบนอกฐานข้อมูล | REQ-PRV-010 |
-| backend/app/main.py, clock.py, config.py, privacy.py | create_app โหมด production ปิด /docs ช่อง now= เฉพาะโหมด test ค่าใหม่ทุกตัวใน config log_event | REQ-SEC-012, REQ-OP-005, D-00-05 |
-| backend/app/payments/, booking/, technicians/, jobstatus/, cancel/, refund/service.py, notify/queue.py, db/ | gateway ไม่ตอบเลยเป็น "รอชำระเงิน" ลองใหม่ด้วย reference เดิม เพดานล็อก 1 ช่วง 403 ทั้งระบบ refund timeout ตัวส่งข้อความส่งซ้ำ migration m002 | REQ-QA-010, REQ-SEC-010, 011 |
-| backend/app/refund/router.py | ลบ (POST /jobs/{id}/cancel ปิด) | MU-01 และ OWASP API9:2023 |
-| backend/tests/ | test ใหม่ 25 ตัว (5 ไฟล์) แก้ test เดิม 8 ตัวเฉพาะบรรทัดที่ CR-07 ระบุ | ดูตาราง "test เดิมที่เปลี่ยน" ใน CR-07 |
-| backend/ops_backup.py | ใหม่ คำสั่งสำรอง กู้คืน และลบซ้ำหลังกู้คืน | REQ-OP-007 |
-| frontend/src/pages/ TechnicianPicker, ConfirmBooking, CancelBooking และ test ใหม่ 3 ไฟล์ | แสดงข้อความจาก API ของคำตอบใหม่ | รายการ "ต้องตรง" ที่ CR-07 เพิ่ม |
-| prompt-log.md | เพิ่ม #69 ถึง #72 | ทุกคำสั่งและการตัดสินของรอบนี้ |
-| .gitignore | เพิ่ม *.pyc, .pytest_cache/, backend/backups/, erasure-ledger.jsonl | ไม่ให้ไฟล์ที่เกิดตอนรันเข้า repo |
+| specs/005-ai-assistant/changes/CR-09.md | Approved 31 ต.ค. 2569 บันทึกประชุม EV-047 คำตอบ Q-55 ถึง Q-63 การแก้ 3 เรื่อง (ค1 ถึง ค3) และเงื่อนไขก่อนทดลองแบบเงาและนำร่อง | การอนุมัติต้องมีเหตุผลและผู้ตัดสิน |
+| specs/005-ai-assistant/ spec, feature, rules, models, quality-requirements, UC-14 | รุ่น 1.0 ส่วน 13 eval และข้อความสั่ง D-14-04 ถึง 07 | CR-09 อนุมัติ |
+| specs/005-ai-assistant/plan.md, tasks.md | ใหม่ plan v1 tasks v1 (T-01 ถึง T-12) | /plan /tasks |
+| specs/005-ai-assistant/eval/ | รุ่น 1.0: qa 200 ข้อ reschedule 60 ข้อ injection 30 ข้อ ใบให้คะแนนของคน CHANGELOG | ขนาดตามหน้าบทเรียน (200, 60 ข้อเกินกรอบ 20, 30) |
+| specs/005-ai-assistant/prompts/ | P-1.0 (รอบที่ 1 ไม่ผ่าน) และ P-1.1 (ใช้ใน B4) ข้อความสั่งและคำตัวอย่าง | ข้อความสั่งคือ "โค้ด" ของกล่อง AI |
+| specs/005-ai-assistant/eval-results.md, .json, eval-results-round1-P-1.0.md | ผล eval จริง 2 รอบ | รอบที่ 1 ไม่ผ่านเพราะภาษาถิ่น (GAP-30) |
+| specs/005-ai-assistant/ac-results.md, rtm.md, gaps.md | ใหม่ F-15, F-16 GAP-30 ถึง GAP-34 | ผลตรวจของ feature ใหม่ |
+| backend/app/assistant/ | ใหม่ 13 ไฟล์: llm.py (interface และ MockLLM) intents.py retrieval.py guard.py tools.py agent.py handoff.py records.py service.py router.py prompts.py evaluation.py และ policies/ (คลังนโยบาย) | REQ-AI-005 ถึง 013, 020, 022, REQ-DAT-010 |
+| backend/app/booking/service.py, router.py | เพิ่ม check_reschedule, reschedule_job, POST /jobs/{id}/reschedule (ไม่แก้ฟังก์ชันเดิม) | REQ-FN-056, BR-06 (GAP-29) |
+| backend/app/db/models.py, migrations/m003_cr09.py | ตารางใหม่ 7 ตาราง ไม่แก้ตารางเดิม | |
+| backend/app/privacy.py, erasure/service.py, ops/scheduler.py, config.py, main.py | mask_text ช่อง log ใหม่ ลบข้อความลูกค้าเมื่อขอลบ ลบบันทึกเกิน 180 วัน ค่าใหม่ทุกตัว | REQ-AI-013, REQ-PRV-010, D-00-05 |
+| backend/eval_run.py | ใหม่ ตัวรัน eval เขียนรายงานลง specs/005-ai-assistant | หน้าบทเรียนหัวข้อ 9.3 "รัน eval" แทน "รัน test" |
+| backend/tests/test_assistant.py, test_assistant_eval.py | test ใหม่ 31 ตัว test เดิมไม่เปลี่ยน | |
+| frontend/src/pages/AssistantChat.jsx, api/client.js, App.jsx, __tests__ 4 ไฟล์ | หน้าแชต UI-14-01 เมนู "ผู้ช่วย" test ใหม่ 6 ตัว | REQ-AI-020, REQ-AI-011, REQ-AI-022 |
+| specs/000-shared/constraints.md | รุ่น 1.2 Approved ตารางของ 005 ในข้อ 3 | CR-09 |
+| specs/000-shared/test-run.txt, ac-results.md | ผลรันจริงทั้งโครงการ รอบ CR-09 | |
+| docs/srs/catalogue.md, baseline.md | catalogue v1.5 (14 ข้อ Approved EV-047) Baseline B4 ตาราง "B4 ต่างจาก B3 อย่างไร" กติกาข้อ 10 | ประกาศ Baseline ใหม่ |
+| docs/srs/operations.md | รุ่น 1.1 เหตุการณ์ที่ 6 เครื่องมือของผู้ช่วย endpoint ใหม่ 11 ตัว | REQ-AI-022, REQ-SEC-012 |
+| docs/srs/stakeholders.md | เพิ่มบทบาท หัวหน้า call center (ยังไม่มีรหัส SH) | เจ้าของผู้ช่วย (Q-60) |
+| prompt-log.md | เพิ่ม #73 ถึง #78 | ทุกคำสั่งและการตัดสินของรอบนี้ |
 
-ดู diff ทั้งหมดของรอบอนุมัติ: `git diff HEAD~1 --stat`
+ดู diff ทั้งหมดของรอบอนุมัติ: `git diff HEAD~1 --stat` และของทั้งบท: `git diff HEAD~2 --stat`
 
 ## งานของบทนี้ที่นักศึกษาต้องทำต่อ
 
-บทเรียน Data, AI และ Agent ไม่เปิดเครื่องเช่นเดิม เจ้าของบ้านพร้อมขอ "ผู้ช่วยตอบคำถามที่เลื่อนนัดให้ได้" แต่ละกลุ่มเขียนข้อกำหนดชุดแรกบนกระดาษ
+บทเรียน RE in One Line และการตรวจรับ มองย้อนทั้งเทอมบนเส้น 7 ขั้น แล้ววางแผนตรวจรับ R1 กับเจ้าของ
 
-1. วาดกล่องของผู้ช่วย ระบายเฉพาะกล่องที่ต้องเป็น AI และจัดการกระทำที่ลูกค้าขอเป็น 3 ระดับ
-2. เขียน REQ-DAT หนึ่งข้อของข้อมูลที่ผู้ช่วยใช้ (ชี้ไปที่ REQ-PRV-002 และ REQ-PRV-010 ในไฟล์กลางของ repo นี้)
-3. เขียน REQ-AI พฤติกรรม 5 กลุ่ม และ eval set 10 ข้อแรก
-4. เขียน REQ-AI ของการกระทำ (agent เลื่อนนัด) ครบ 4 เรื่อง เครื่องมือ จุดอนุมัติ หยุด บันทึก โดยทำด้วยสิทธิ์ของลูกค้าผ่าน API เดิม ซึ่งมี REQ-SEC-010 คุมอยู่แล้วใน repo นี้
-5. เขียน REQ-AI เรื่องเป็นธรรม โปร่งใส กำกับโดยมนุษย์ และแผน V&V หนึ่งหน้า
-6. บอกว่าแต่ละข้อไปอยู่ไฟล์กลาง (ส่วนใหม่ "AI") หรือสเปกของ feature ผู้ช่วย และตรวจที่ชั้นไหนของ V
+1. วาดเส้น 7 ขั้นบน A3 วางชิ้นงานของ repo นี้ใต้ขั้นที่มันอยู่ พร้อมช่วงรหัส (EV-001 ถึง EV-047, CR-01 ถึง CR-09, B1 ถึง B4) ขั้นไหนไม่มีชิ้นงานให้เว้นว่าง
+2. เดินย้อน 2 เส้น จากโค้ดถึงหลักฐาน เช่น guard.py ไปหา REQ-AI-008 ไปหา EV-046 และ booking/reschedule_job ไปหา REQ-FN-056 ไปหา GAP-29
+3. เขียนแผนตรวจรับ R1 หนึ่งหน้า อ้างอิง Baseline B4 (ไม่ใช่ B2 อย่างตัวอย่างในหน้าบทเรียน) ผู้ลงนาม เกณฑ์เริ่ม เกณฑ์จบ ข้อที่ตรวจได้แค่ย่อส่วนให้เป็นเงื่อนไข (เช่น AC-07-08 ที่ 500 คน และผล eval ที่วัดกับ MockLLM)
+4. แยกสิ่งที่พบระหว่างตรวจรับเป็น ข้อบกพร่อง คำขอเปลี่ยนแปลง และสเปกผิด ด้วยคำถามเดียวว่า "Baseline B4 เขียนไว้อย่างไร" ตัวอย่างในหน้าบทเรียนคือ DEF-01 และ CR-08 (เลือกช่างคนเดิม)
+5. ตัดสินผู้ช่วย UC-14 แยกจาก 002 ถึง 004: ผู้ช่วยยังเป็น MockLLM และเกณฑ์ที่ต้องใช้คนยังไม่ทำ จะรับ รับแบบมีเงื่อนไข หรือไม่รับ ด้วยเหตุผลที่อ้างเกณฑ์จบ
 
-ผลลัพธ์อยู่ใน repo ถัดไป (baanprom-sdd-06-accept): specs/005-assistant/ (spec, eval/ และ prompts/ ที่มีรุ่น) ส่วน "AI" ใหม่ในไฟล์กลาง และ CR ที่นำข้อกำหนดชุดแรกของผู้ช่วยเข้าสู่การพิจารณา
+ผลลัพธ์อยู่ใน repo ถัดไป (baanprom-sdd-07-r1-done): แผนตรวจรับ R1 บันทึกการตรวจรับ สิ่งที่พบ และ CR ที่เกิดจากการตรวจรับ
 ใน repo นี้ยังไม่มีไฟล์เหล่านี้ ตั้งใจให้เป็นอย่างนั้น ทำของตัวเองก่อน แล้วค่อยเปิดเฉลย
 
 ## ถ้าทำของตัวเองพลาดหรือไม่ทัน
@@ -100,20 +103,20 @@ commit ที่ 2 (หลังอนุมัติ)
 ทางที่ 2 clone แล้วเปลี่ยน remote
 
 ```
-git clone https://github.com/ppsajja/baanprom-sdd-05-ai.git baanprom-group
+git clone https://github.com/ppsajja/baanprom-sdd-06-accept.git baanprom-group
 cd baanprom-group
 git remote set-url origin https://github.com/<บัญชีของกลุ่ม>/<ชื่อ repo ของกลุ่ม>.git
 git push -u origin main
 ```
 
 `git remote set-url origin` เปลี่ยนปลายทางของ push จาก repo ของผู้สอนเป็น repo ของกลุ่ม (ต้องสร้าง repo เปล่าบน GitHub ไว้ก่อน)
-ถ้าอยากเริ่มจากสภาพ Failure Day ที่ยังไม่อนุมัติ ใช้ `git checkout HEAD~1` แล้วสร้าง branch ของกลุ่มจากจุดนั้น
+ถ้าอยากเริ่มจากสภาพหลัง Studio ที่ยังไม่อนุมัติ ใช้ `git checkout HEAD~1` แล้วสร้าง branch ของกลุ่มจากจุดนั้น
 
 ## ทีม
 
 - ชื่อทีม: กลุ่ม X (ตัวอย่างของรายวิชา)
 - สมาชิก: สมาชิก A, สมาชิก B, สมาชิก C, สมาชิก D
-- เครื่องมือ AI ที่ใช้: Copilot Chat โหมด Agent ใน GitHub Codespaces (รอบ Failure Day และรอบอนุมัติ ผู้สอนเดโมด้วย Claude Code)
+- เครื่องมือ AI ที่ใช้: Copilot Chat โหมด Agent ใน GitHub Codespaces (รอบนี้ผู้สอนเดโมด้วย Claude Code)
 
 ## โครงของ repo
 
@@ -121,28 +124,25 @@ git push -u origin main
 README.md                      ไฟล์นี้
 AGENTS.md                      กติกาที่ AI ต้องทำตาม 10 ข้อ (agent-pack รุ่น 2)
 CLAUDE.md                      ชี้ไป AGENTS.md (สำหรับ Claude Code)
-prompt-log.md                  บันทึกทุกคำสั่ง คำถาม คำตอบ และสิ่งที่ AI เดา (เพิ่มต่อท้ายเท่านั้น ล่าสุด #72)
-docs/srs/                      catalogue v1.4, UC-07, UC-08, UC-09, glossary, baseline (B3 ด้านบน), operations.md (runbook ฉบับใช้จริง)
-docs/                          แบบเอกสาร (CR, rtm, mockup, constraints) และคู่มือ agent-pack
-specs/README.md                ดัชนี feature
-specs/000-shared/              Constraint กลางรุ่น 1.1 (10 ข้อในส่วน 6) cross-cutting.feature (AC-00-nn) ac-results rtm gaps test-run ของทั้งโครงการ
-specs/002-booking/             UC-07 spec 1.5 รวม changes/CR-01 ถึง CR-04 และ CR-07
-specs/003-job-status/          UC-09 spec 1.1 (CR-05 และ CR-07)
-specs/004-cancel-refund/       UC-08 spec 1.1 (CR-06 และ CR-07)
-backend/                       Python FastAPI + SQLAlchemy (test ใช้ SQLite) app/ops และ app/erasure ใหม่ใน CR-07 ops_backup.py คำสั่งของคนเวร
-frontend/                      React (Vite) + Tailwind CSS + Vitest
-.github/prompts/, .claude/commands/, .cursor/commands/   คำสั่ง /clarify /plan /tasks /implement
+prompt-log.md                  บันทึกทุกคำสั่ง (เพิ่มต่อท้ายเท่านั้น ล่าสุด #78)
+docs/srs/                      catalogue v1.5, UC-07, UC-08, UC-09, UC-14, glossary, baseline (B4 ด้านบน), operations.md รุ่น 1.1
+specs/000-shared/              Constraint กลางรุ่น 1.2 (ส่วน 7 "AI") AC ข้ามทุก feature test-run ของทั้งโครงการ
+specs/002-booking/             UC-07 spec 1.5
+specs/003-job-status/          UC-09 spec 1.1
+specs/004-cancel-refund/       UC-08 spec 1.1
+specs/005-ai-assistant/        UC-14 spec 1.0 eval/ (290 ข้อ) prompts/ (P-1.0, P-1.1) eval-results.md changes/CR-09.md
+backend/                       Python FastAPI + SQLAlchemy app/assistant ใหม่ eval_run.py ตัวรัน eval
+frontend/                      React (Vite) + Tailwind CSS + Vitest หน้าใหม่ "ผู้ช่วย"
 ```
 
 อ่านรอบนี้ตามลำดับนี้
 
-1. specs/002-booking/changes/CR-07.md (ส่วนบนคือข้อเสนอเดิม ส่วน "บันทึกประชุมทบทวน" คือสิ่งที่เปลี่ยน)
-2. specs/000-shared/constraints.md ส่วน 6
-3. specs/000-shared/cross-cutting.feature แล้ว .feature ของแต่ละ feature (ส่วน CR-07 ท้ายไฟล์)
-4. plan.md ข้อ 5 และข้อ 9 แล้ว tasks.md ส่วนท้ายของแต่ละ feature
-5. specs/000-shared/test-run-cr07-round1.txt (รอบที่ test เดิมพัง 8 ตัว) แล้ว test-run.txt
-6. ac-results.md, rtm.md, gaps.md แล้ว docs/srs/baseline.md (B3)
-7. docs/srs/operations.md
+1. specs/005-ai-assistant/spec.md ส่วน 3 (เส้นแบ่งกฎกับ AI และตารางระดับการกระทำ) แล้วส่วน 4
+2. specs/005-ai-assistant/changes/CR-09.md (ส่วนบนคือข้อเสนอเดิม ส่วน "บันทึกประชุมทบทวน" คือสิ่งที่เปลี่ยน)
+3. specs/005-ai-assistant/ai-assistant.feature แล้ว eval/README.md และตัวอย่างใน eval/qa.jsonl
+4. specs/005-ai-assistant/eval-results-round1-P-1.0.md (รอบที่ไม่ผ่าน) แล้ว eval-results.md
+5. backend/app/assistant/service.py (ลำดับ 5 ขั้น) guard.py และ llm.py (MockLLM ทำผิดตรงไหนบ้าง)
+6. ac-results.md, rtm.md, gaps.md แล้ว docs/srs/baseline.md (B4)
 
 ## วิธีรัน
 
@@ -152,10 +152,13 @@ frontend/                      React (Vite) + Tailwind CSS + Vitest
 cd backend
 pip install -r requirements.txt
 python -m pytest -v -k "AC_"
+python eval_run.py
 APP_ENV=development uvicorn app.main:app --reload --port 8000
 ```
 
-ระบบตั้งค่าตั้งต้นเป็นโหมด production (REQ-SEC-012) ถ้ารัน uvicorn โดยไม่ตั้ง APP_ENV หน้า /docs จะปิด และ /notifications/queue กับ /metrics ต้องมี header X-Ops-Token ที่ตรงกับตัวแปร OPS_TOKEN ชุด test ตั้ง APP_ENV=test ให้เองใน conftest.py
+`python eval_run.py` รัน eval ทั้ง 3 ชุดกับ MockLLM เขียนผลลง specs/005-ai-assistant/eval-results.md และ .json คืนรหัส 0 เมื่อผ่านทุกเกณฑ์
+ลองรุ่นข้อความสั่งเดิม: `python eval_run.py --prompt-version P-1.0 --out /tmp/round1.md` (ไม่ผ่าน 9 เกณฑ์ เหมือนรอบที่ 1)
+ระบบตั้งค่าตั้งต้นเป็นโหมด production (REQ-SEC-012) ถ้ารัน uvicorn โดยไม่ตั้ง APP_ENV หน้า /docs จะปิด และ endpoint ของ ops ต้องมี header X-Ops-Token ที่ตรงกับตัวแปร OPS_TOKEN
 
 หน้าจอ
 
@@ -166,52 +169,46 @@ npm test
 npm run dev
 ```
 
-ซ้อมสำรองและกู้คืนบนเครื่องพัฒนา (REQ-OP-007)
-
-```
-cd backend
-APP_ENV=development python seed_demo.py
-python ops_backup.py backup baanprom.db ../offsite-test
-python ops_backup.py restore ../offsite-test /tmp/restored.db
-```
-
 ถ้าเปิดด้วย GitHub Codespaces คำสั่ง pip install และ npm install ถูกรันให้แล้วตอนสร้างเครื่อง
 
-ผลที่ควรเห็น (รันจริงจาก repo นี้ ตรงกับ specs/000-shared/test-run.txt)
+ผลที่ควรเห็น (รันจริงจาก repo นี้ ตรงกับ specs/000-shared/test-run.txt และ specs/005-ai-assistant/eval-results.md)
 
-- Python 3.11, 3.12, 3.13: บรรทัดสุดท้าย `66 passed, 1 skipped, 1 warning` (ข้าม 1 คือ AC-07-10 แถว R3 ที่รอ Q-14)
-- หน้าจอ: `Test Files 17 passed (17)` และ `Tests 31 passed (31)`
-- ถ้าเปิด commit ที่ 1 (`git checkout HEAD~1`) จะได้ 41 passed, 1 skipped และ 27 passed เท่ารอบ R1
+- Python 3.11 และ 3.12: บรรทัดสุดท้าย `97 passed, 1 skipped, 1 warning` (ข้าม 1 คือ AC-07-10 แถว R3 ที่รอ Q-14)
+- หน้าจอ: `Test Files 21 passed (21)` และ `Tests 37 passed (37)`
+- eval: `prompt P-1.1: 20/20 เกณฑ์ผ่าน`
+- ถ้าเปิด commit ที่ 1 (`git checkout HEAD~1`) จะได้ 66 passed, 1 skipped และ 31 passed เท่า repo 05 เพราะยังไม่มีโค้ดของผู้ช่วย
 
 ## สิ่งที่รู้อยู่แล้วว่ายังไม่ใช่ของจริง
 
-- R1 ยังไม่มีการเข้าสู่ระบบ (UC-01, UC-02 อยู่ใน R2) การตรวจสิทธิ์ของ REQ-SEC-010 จึงใช้ customer_id และ technician_id ที่ผู้ขอส่งมาเอง ซึ่งยังปลอมได้ (TH-01) และ GET /jobs/{id} กับ /history ยังไม่ตรวจสิทธิ์ (GAP-24)
-- FakeGateway ใช้แทน Payment Gateway จริง (IF-01) FakeNotifier ใช้แทนระบบส่งข้อความ (IF-02) และคิวแจ้งเตือนอยู่ในหน่วยความจำ
-- ช่องทางถึงคนเวร (Pager) เขียน log อย่างเดียว Ops lead ยังไม่เลือกบริการ (GAP-28)
-- ตัวนับของ REQ-OP-005 อยู่ในหน่วยความจำ ระบบจริงต้องส่งออกให้เครื่องมือเฝ้าดู
-- สำรองและกู้คืนทดสอบบนไฟล์ SQLite เท่านั้น การซ้อมบน PostgreSQL ของระบบจริงยังไม่ทำ (เงื่อนไขก่อนเปิด R1)
-- AC-07-08, AC-09-12, AC-08-09 ผ่านแบบย่อส่วน และ AC-08-07 บน SQLite ไม่พิสูจน์การชนกัน (GAP-15) ผลตรวจรับจริงต้องวัดบนเครื่องทดสอบ
-- ระยะทาง BR-03 ใช้สูตรคำนวณจากพิกัดแทนบริการแผนที่ (IF-03) ค่า timeout 5 วินาทีของ IF-03 อยู่ใน config แต่ยังไม่มีใครเรียก
-- สถานะหน้าจอใหม่ 3 แบบยังไม่มีภาพใน mockup และหน้าผลการยกเลิกยังไม่บอกเมื่อคืนเงินไม่ทราบผล (GAP-26)
-- หน้าจอยังไม่แสดงราคาประเมิน ไม่มีปุ่มเข้าคิวรอ และไม่ให้เลือกที่อยู่ เพราะยังเป็น Q-26, Q-28, Q-29 ลูกค้าและช่างบนหน้าจอเป็นค่าคงที่
-- `backend/seed_demo.py` ใส่ข้อมูลสมมติไว้เปิดดูหน้าจอ ไม่ใช่ส่วนของระบบ
+- **LLM เป็น MockLLM** (backend/app/assistant/llm.py) ตัวจริงยังไม่ต่อ เพราะยังไม่เลือกผู้ให้บริการที่ผ่านเงื่อนไขของ SH-05 (Q-56) MockLLM กำหนดผลจากค่า crc32 ของคำถาม จำลองทั้งการตอบถูก การไม่บอกเวลานัด การแต่งเวลาที่ช่างจะถึงและจำนวนวันคืนเงิน การอ้างคืนเต็มจำนวน และการทำตามข้อความหลอก ผล eval 197 จาก 200 จึงบอกว่ารั้ว กฎ และวิธีวัดทำงาน **ไม่ได้บอกว่า LLM ตัวจริงจะผ่าน**
+- ขั้นจำแนกความตั้งใจเป็นกฎกับคำตัวอย่าง ไม่ใช่โมเดล คำภาษาถิ่นมีเท่าที่ call center ให้มา (P-1.1)
+- คำถามใน eval set สร้างขึ้นเพื่อการสอน ไม่ได้มาจากสายจริง ขยายจาก 10 ข้อแรกด้วยสคริปต์ที่อยู่นอก repo
+- เกณฑ์ที่ต้องใช้คนยังไม่ได้วัด: คนตรวจ 30 ข้อ (AC-14-03) ลูกค้าจริง 20 คน (AC-14-09, AC-14-12) ซ้อมปิดผู้ช่วยจับเวลา (AC-14-14) ทดลองแบบเงาและนำร่องยังไม่เริ่ม
+- เวลาตอบ p95 ที่วัดได้ (ราว 10 มิลลิวินาที) เป็นเวลาของโค้ดเรากับ MockLLM ค่าใช้จ่ายต่อคำถามวัดไม่ได้
+- R1 ยังไม่มีการเข้าสู่ระบบ ผู้ช่วยทำในนามลูกค้าจาก customer_id ที่ส่งมาเอง ซึ่งยังปลอมได้ (TH-01) จึงห้ามนำร่องก่อนมี UC-02 (CR-09 ข้อ ค3)
+- หัวหน้า call center ยังไม่มีกุญแจของตัวเอง ต้องสั่งคนเวรกดปิด (GAP-32) call center ยังไม่มีเครื่องมือเลื่อนกลับ (GAP-31)
+- mockup UI-14-01 ยังไม่มีภาพ .png และยังไม่ได้ตรวจหน้าจอจริงเทียบ mockup ด้วยคน (GAP-33)
+- เลขโทรของ call center บนปุ่มโทรเป็นเลขสมมติ 02-000-0000 (ตั้งจริงผ่าน CALL_CENTER_TEL)
+- ของเดิมจาก repo 05 ที่ยังไม่ใช่ของจริง ยังอยู่ทั้งหมด: FakeGateway, FakeNotifier, คิวในหน่วยความจำ, Pager เขียน log อย่างเดียว (GAP-28), สำรองกู้คืนบน SQLite เท่านั้น, ผลย่อส่วนของ AC-07-08, AC-09-12, AC-08-09, ระยะทางจากสูตรแทนบริการแผนที่
 
 ## คำถามที่ยังเปิด และจะได้คำตอบใน repo ไหน
 
 | คำถาม | เรื่อง | สถานะ |
 |---|---|---|
-| Q-25, Q-38 ถึง Q-47 | ตัวเลขและการตัดสินของ CR-07 | ปิดแล้วใน repo นี้ (EV-045) |
-| Q-26, Q-31, Q-34 | เงื่อนไขก่อนเปิด R1 ให้ลูกค้าจริง (CR-03, CR-05, CR-06) | ยังเปิด ใช้เป็นเกณฑ์ในบท RE in One Line และการตรวจรับ (repo 06) |
-| ข้อตกลงกับ IF-02, ซ้อมกู้คืนบนระบบจริง, ช่องทางถึงคนเวร (GAP-28) | เงื่อนไขก่อนเปิด R1 ที่ CR-07 เพิ่ม | ยังเปิด ใช้เป็นเกณฑ์ตรวจรับด้านปฏิบัติการ (repo 06 และ 07) |
+| Q-55 ถึง Q-63 | ข้อกำหนดของผู้ช่วย UC-14 | ปิดแล้วใน repo นี้ (EV-047) |
+| Q-35 | จำนวนวันที่เงินคืนเข้า | ยังเปิด ผู้ช่วยตอบว่ายังไม่มีข้อมูล |
+| Q-26, Q-31, Q-34 | เงื่อนไขก่อนเปิด R1 ให้ลูกค้าจริง (CR-03, CR-05, CR-06) | ยังเปิด ใช้เป็นเกณฑ์ในบท RE in One Line และการตรวจรับ ผลอยู่ใน baanprom-sdd-07-r1-done |
+| ข้อตกลงกับ IF-02 ซ้อมกู้คืนบนระบบจริง ช่องทางถึงคนเวร (GAP-28) | เงื่อนไขก่อนเปิด R1 จาก CR-07 | ยังเปิด เกณฑ์ตรวจรับด้านปฏิบัติการ (repo 07) |
+| เลือกผู้ให้บริการ LLM (IF-05) และรัน eval กับตัวจริง | เงื่อนไขก่อนทดลองแบบเงา (CR-09) | ยังเปิด ตัดสินในการตรวจรับว่าผู้ช่วยอยู่ใน R1 หรือไม่ (repo 07) |
+| F-15 คำว่า "ทุกจอ" ใน REQ-AI-020 | หน้าจอไหนต้องมีปุ่มคุยกับเจ้าหน้าที่ | ถาม SH-01 ในบท RE in One Line และการตรวจรับ (repo 07) |
 | CR-02 | ทำให้ REQ-QA-003 วัดได้ (รอ SH-01) | ยังรอ SH-01 |
-| Q-14, Q-18, Q-19, Q-22, Q-23, Q-27, Q-28, Q-29, Q-30, Q-32, Q-33, Q-35, Q-36, Q-37 | ค้างจาก B1 รอบเปลี่ยนแปลง และ R1 | ยังเปิด ทุกข้อมีเจ้าของและพฤติกรรมชั่วคราว Q-22 (พิกัด) เกี่ยวกับข้อมูลที่ผู้ช่วย AI จะใช้ในบทถัดไปโดยตรง |
-| GAP-24, GAP-26 | สิทธิ์ของ GET /jobs/{id} รอ UC-02 และภาพ mockup ของสถานะใหม่ | ยังเปิด |
-| ผู้ช่วยตอบคำถามและ agent เลื่อนนัด | ยังไม่มี REQ-AI ข้อใดนอกจาก REQ-AI-002 (Won't R1) | งานของบท Data, AI และ Agent ผลอยู่ใน repo 06 |
+| Q-14, Q-18, Q-19, Q-22, Q-23, Q-27, Q-28, Q-29, Q-30, Q-32, Q-33, Q-36, Q-37 | ค้างจาก B1 ถึง R1 | ยังเปิด ทุกข้อมีเจ้าของและพฤติกรรมชั่วคราว |
+| GAP-24, GAP-26, GAP-31, GAP-32, GAP-33, F-16 | สิทธิ์ของ GET /jobs/{id} mockup เครื่องมือของ call center กุญแจแยกบทบาท test กรณีหมดเวลาหลังทำ | ยังเปิด |
 
-## Reflection ของกลุ่ม X รอบ Failure Day และการอนุมัติ (5 บรรทัด)
+## Reflection ของกลุ่ม X รอบ Data, AI และ Agent (5 บรรทัด)
 
-1. สิ่งที่ประชุมเจอแต่ร่างไม่เจอ: AC-09-13 ที่ร่างไว้ขัดกับ REQ-QA-010 ของตัวเอง (ส่งซ้ำครบ 6 ครั้งก่อน IF-02 กลับมา) เจอตอนเขียน test ก่อนเขียนโค้ด
-2. สิ่งที่ปิดช่องได้ดีกว่าการเพิ่มการตรวจ: ปิด POST /jobs/{id}/cancel ทั้งตัว แทนการเพิ่ม customer_id ให้มัน เพราะสองทางที่ทำสิ่งเดียวกันคือที่มาของ MU-01
-3. test เดิมที่พัง 8 ตัวไม่ใช่ข่าวร้าย ทุกตัวอยู่ในตารางผลกระทบของ CR ก่อนรัน ถ้ามีตัวที่ 9 ที่ไม่อยู่ในตาราง นั่นคือสิ่งที่ต้องตกใจ
-4. ข้อกำหนดที่ "ไม่มีใครเขียน" ยังมีอยู่หลังอนุมัติ: ช่องทางถึงคนเวร (GAP-28) และสิทธิ์ของหน้าที่ไม่รู้ตัวผู้ขอ (GAP-24) เราบันทึกเป็นช่องว่างที่มีเจ้าของ ไม่ใช่แอบทำ
-5. 30 วันของการลบเป็นค่าของบริษัท ไม่ใช่ของกฎหมาย การเขียนให้ชัดตั้งแต่สเปกทำให้ SH-05 ตรวจได้ในประชุมเดียว
+1. test ผ่านทั้งชุดตั้งแต่รอบแรก แต่ eval ไม่ผ่าน 9 เกณฑ์ ความผิดไม่ได้อยู่ในข้อใดข้อหนึ่ง แต่ตกกับคนที่พิมพ์ภาษาถิ่น เราเห็นได้เพราะติดป้ายกลุ่มให้ทุกข้อตั้งแต่สร้างชุด
+2. สิ่งที่กันข้อความหลอกได้จริงคือรั้วที่เป็นโค้ด ปิดรั้วขาออกแล้วชุดหลอก 30 ข้อเหลือผ่าน 20 ข้อความสั่งที่ยาวขึ้นไม่ได้ช่วย
+3. agent ไม่มีกฎของตัวเอง BR-06 อยู่ใน booking ที่เดียว ผู้ช่วยกับ API ของลูกค้าใช้ฟังก์ชันเดียวกัน
+4. หน้าบทเรียนบอกให้เลื่อนนัด "ผ่าน API เดิม" แต่ API นั้นไม่มี ถ้าไม่ไล่ของเดิมก่อน agent จะได้สิทธิ์แก้ตาราง jobs เอง (GAP-29)
+5. ผล eval กับ MockLLM เป็นหลักฐานของรั้วและวิธีวัด ไม่ใช่ของ AI ตัวจริง ต้องเขียนให้ชัดก่อนเจ้าของเอาตัวเลขไปใช้ตอนตรวจรับ

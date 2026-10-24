@@ -126,3 +126,94 @@ def technician_view(job: Job, now: datetime) -> dict:
     if reveal_from <= now and job.status not in ("done", "cancelled", "auto_cancelled"):
         data["customer_phone"] = job.customer.phone
     return data
+
+
+# ---- CR-09 REQ-FN-056 เลื่อนนัดของลูกค้า ตาม BR-06 (specs/005-ai-assistant/rules.md) ----
+# ผู้ช่วย (UC-14) เรียกฟังก์ชันนี้ผ่านเครื่องมือ "เลื่อนนัด" ด้วยสิทธิ์ของลูกค้า ไม่มีทางเลื่อนนัดทางอื่น (REQ-AI-011 บรรทัดที่ 3)
+from app.db.models import JobReschedule  # noqa: E402
+
+# ข้อความถึงลูกค้าเมื่อไม่ผ่าน BR-06 อยู่ที่นี่ที่เดียว (ผู้ช่วยและ API ใช้ข้อความเดียวกัน)
+RESCHEDULE_MESSAGES = {
+    "not_confirmed": "เลื่อนนัดได้เฉพาะงานที่สถานะ ยืนยันแล้ว",
+    "limit_reached": "งานนี้เลื่อนนัดครบ {max} ครั้งแล้ว",
+    "too_late": "เหลือเวลาก่อนนัดเดิมน้อยกว่า {hours} ชั่วโมง เลื่อนเองไม่ได้",
+    "other_technician": "เลื่อนได้เฉพาะช่วงเวลาของช่างคนเดิม",
+    "out_of_window": "เวลาใหม่ต้องเริ่มอย่างน้อย {hours} ชั่วโมงจากตอนนี้ และอยู่ภายใน {days} วันข้างหน้า",
+    "slot_taken": "ช่วงเวลานี้ไม่ว่างแล้ว",
+}
+BEYOND_RULE = ("not_confirmed", "limit_reached", "too_late", "other_technician", "out_of_window")
+
+
+class RescheduleRejected(Exception):
+    """BR-06 ไม่ผ่าน reason เป็นรหัสใน RESCHEDULE_MESSAGES ข้อ 1 ถึง 5 คือเกินกรอบ (ส่งต่อคน) slot_taken คือข้อ 6"""
+    def __init__(self, reason: str):
+        self.reason = reason
+        self.message = RESCHEDULE_MESSAGES[reason].format(max=config.RESCHEDULE_MAX_PER_JOB,
+                                                         hours=config.RESCHEDULE_MIN_HOURS_BEFORE,
+                                                         days=config.SEARCH_DAYS_AHEAD)
+
+    @property
+    def beyond_rule(self) -> bool:
+        return self.reason in BEYOND_RULE
+
+
+def reschedules_used(db, job: Job) -> int:
+    return len(db.scalars(select(JobReschedule).where(JobReschedule.job_id == job.id)).all())
+
+
+def reschedule_window(now: datetime) -> tuple[datetime, datetime]:
+    """BR-06 ข้อ 5: เริ่มไม่น้อยกว่า 12 ชั่วโมงจากตอนนี้ และอยู่ในช่วงที่ค้นได้ตาม REQ-FN-008 (ถึงสิ้นวันที่ 7 นับจากพรุ่งนี้)"""
+    earliest = now + timedelta(hours=config.RESCHEDULE_MIN_HOURS_BEFORE)
+    first_day = (now + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+    return earliest, first_day + timedelta(days=config.SEARCH_DAYS_AHEAD)
+
+
+def check_reschedule(db, job: Job, new_slot: TimeSlot | None, now: datetime) -> None:
+    """ตรวจ BR-06 จากบนลงล่าง ข้อแรกที่ไม่ผ่านคือเหตุ new_slot = None ตรวจเฉพาะข้อ 1 ถึง 3 (ใช้ก่อนเสนอช่วงว่าง)"""
+    if job.status != "confirmed":
+        raise RescheduleRejected("not_confirmed")
+    if reschedules_used(db, job) >= config.RESCHEDULE_MAX_PER_JOB:
+        raise RescheduleRejected("limit_reached")
+    if job.scheduled_start - now < timedelta(hours=config.RESCHEDULE_MIN_HOURS_BEFORE):
+        raise RescheduleRejected("too_late")
+    if new_slot is None:
+        return
+    if new_slot.technician_id != job.technician_id:
+        raise RescheduleRejected("other_technician")
+    earliest, latest = reschedule_window(now)
+    if not (earliest <= new_slot.start < latest):
+        raise RescheduleRejected("out_of_window")
+    release_expired_holds(db, now)
+    if new_slot.state != SLOT_FREE or new_slot.id == job.slot_id:
+        raise RescheduleRejected("slot_taken")
+
+
+def free_slots_for_reschedule(db, job: Job, now: datetime) -> list[TimeSlot]:
+    """ช่วงว่างของช่างคนเดิมที่อยู่ในกรอบ BR-06 ข้อ 5 (เครื่องมือ "อ่านช่วงเวลาว่างของช่างคนเดิม" REQ-AI-010)"""
+    release_expired_holds(db, now)
+    earliest, latest = reschedule_window(now)
+    return db.scalars(select(TimeSlot).where(TimeSlot.technician_id == job.technician_id, TimeSlot.state == SLOT_FREE,
+                                             TimeSlot.start >= earliest, TimeSlot.start < latest,
+                                             TimeSlot.id != job.slot_id).order_by(TimeSlot.start)).all()
+
+
+def reschedule_job(db, job: Job, new_slot: TimeSlot, now: datetime, reference: str | None = None) -> JobReschedule:
+    """REQ-FN-056 / BR-06 ลำดับ 1 ถึง 4 ในธุรกรรมเดียว reference เดิมที่ทำสำเร็จแล้ว คืนแถวเดิม ไม่เลื่อนซ้ำ"""
+    if reference is not None:
+        done = db.scalars(select(JobReschedule).where(JobReschedule.reference == reference)).first()
+        if done is not None:
+            return done
+    check_reschedule(db, job, new_slot, now)
+    old_slot = db.get(TimeSlot, job.slot_id)
+    record = JobReschedule(job_id=job.id, from_slot_id=old_slot.id, to_slot_id=new_slot.id,
+                           from_start=job.scheduled_start, to_start=new_slot.start, reference=reference,
+                           by_role="customer", at=now)
+    old_slot.state, old_slot.held_by_customer_id, old_slot.hold_expires_at = SLOT_FREE, None, None   # ลำดับ 1
+    new_slot.state, new_slot.held_by_customer_id, new_slot.hold_expires_at = SLOT_BOOKED, None, None  # ลำดับ 2
+    job.slot_id, job.scheduled_start = new_slot.id, new_slot.start
+    db.add(record)                                                                                     # ลำดับ 3
+    text = f"งาน #{job.id} เลื่อนนัดเป็น {new_slot.start:%d/%m %H:%M}"
+    queue.enqueue("customer", job.customer_id, text, job.id, now)                                     # ลำดับ 4
+    queue.enqueue("technician", job.technician_id, text, job.id, now)
+    db.commit()
+    return record

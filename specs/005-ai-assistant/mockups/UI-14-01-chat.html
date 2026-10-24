@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UI-14-01 แชตผู้ช่วย (ร่าง)</title>
-<!-- mockup ร่างจาก Studio บทเรียน Data, AI และ Agent ยังไม่ได้ตกลงกับ SH-01 และหัวหน้า call center
+<title>UI-14-01 แชตผู้ช่วย</title>
+<!-- mockup จาก Studio บทเรียน Data, AI และ Agent ตกลงกับ SH-01 และหัวหน้า call center ใน EV-047 (CR-09)
+     กล่อง "รอ Q-55" (ค่าธรรมเนียม) เอาออกแล้ว SH-01 ตอบว่าไม่มีค่าธรรมเนียม
      รองรับ REQ-AI-020, REQ-AI-011, REQ-AI-022, REQ-AI-012 รายการ "ต้องตรง" อยู่ใน spec.md ส่วน 12
      ข้อมูลในหน้านี้เป็นตัวอย่าง ห้ามนำไปใส่ตายตัวในโค้ด (AGENTS.md กฎข้อ 10) -->
 <style>
@@ -25,7 +26,7 @@
 
 <section class="state">
   <div class="label">สถานะ 1 เริ่มบทสนทนา</div>
-  <div class="bot">ข้อความแรกจากระบบ: บอกว่าเป็นผู้ช่วยอัตโนมัติ และบอก 5 เรื่องที่ตอบได้</div>
+  <div class="bot">ข้อความแรกจากระบบ: บอกว่าเป็นผู้ช่วยอัตโนมัติ บอก 5 เรื่องที่ตอบได้ และบอกว่าบันทึกบทสนทนา 180 วัน</div>
   <div class="row"><input placeholder="พิมพ์คำถาม" style="flex:1"><button class="primary">ส่ง</button></div>
   <div class="row"><button>คุยกับเจ้าหน้าที่</button></div>
 </section>
@@ -52,7 +53,6 @@
       <tr><td>ช่าง</td><td>ประสิทธิ์ (คนเดิม)</td></tr>
     </table>
     <div class="row"><button class="primary">ยืนยันเลื่อนนัด</button><button>ไม่ใช่</button></div>
-    <div class="wait">รอ Q-55: ค่าธรรมเนียมการเลื่อน (ถ้ามี) ห้ามสร้างจนกว่าจะได้คำตอบ</div>
   </div>
   <div class="row"><button>คุยกับเจ้าหน้าที่</button></div>
 </section>

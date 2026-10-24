@@ -76,3 +76,40 @@ export const cancelApi = {
     }))
   },
 }
+
+// ---- UC-14 ผู้ช่วยตอบคำถามและเลื่อนนัด (specs/005-ai-assistant, CR-09) ----
+async function post(path, body) {
+  return readJson(await fetch(`${BASE}${path}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  }))
+}
+
+export const assistantApi = {
+  // REQ-AI-022 ผู้ช่วยเปิดอยู่ไหม (ปิดอยู่ แสดงข้อความและปุ่มโทร)
+  async getStatus() {
+    return readJson(await fetch(`${BASE}/assistant/status`))
+  },
+  // REQ-AI-020 ข้อความแรกมาจากระบบ
+  async start({ customerId }) {
+    return post('/assistant/conversations', { customer_id: customerId })
+  },
+  async send({ conversationId, customerId, text }) {
+    return post('/assistant/messages', { conversation_id: conversationId, customer_id: customerId, text })
+  },
+  // REQ-AI-011 ระดับ 2: เรียกเฉพาะเมื่อลูกค้ากด "ยืนยันเลื่อนนัด"
+  async confirm({ proposalId, customerId }) {
+    return post(`/assistant/proposals/${proposalId}/confirm`, { customer_id: customerId })
+  },
+  async decline({ proposalId, customerId }) {
+    return post(`/assistant/proposals/${proposalId}/decline`, { customer_id: customerId })
+  },
+  async handoff({ conversationId, customerId }) {
+    return post(`/assistant/conversations/${conversationId}/handoff`, { customer_id: customerId })
+  },
+  // REQ-AI-022 ปุ่ม "คำตอบนี้ไม่ถูกต้อง"
+  async report({ turnId, customerId }) {
+    return post(`/assistant/turns/${turnId}/report`, { customer_id: customerId })
+  },
+}

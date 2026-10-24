@@ -42,6 +42,9 @@ def anonymize(db, customer: Customer, now: datetime) -> None:
     customer.erased_at = now
     for a in db.scalars(select(ServiceAddress).where(ServiceAddress.customer_id == customer.id)):
         a.text, a.lat, a.lng = "", 0.0, 0.0
+    # CR-09 (Q-57 SH-05): ข้อความที่ลูกค้าพิมพ์กับผู้ช่วยเป็นข้อมูลของลูกค้า ลบพร้อมกัน คงรหัสและผลไว้
+    from app.assistant.records import erase_customer_text
+    erase_customer_text(db, customer.id)
 
 
 def append_ledger(customer_id: int, now: datetime, path: str | None = None) -> None:

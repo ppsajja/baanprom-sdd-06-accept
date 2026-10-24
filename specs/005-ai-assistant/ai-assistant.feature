@@ -1,5 +1,7 @@
-# ai-assistant.feature v0.1 | AC-14-01 ถึง AC-14-16 | จาก UC-14, BR-06 และ REQ-AI ของบทเรียน Data, AI และ Agent
+# ai-assistant.feature v1.0 | AC-14-01 ถึง AC-14-16 | จาก UC-14, BR-06 และ REQ-AI ของบทเรียน Data, AI และ Agent
 # v0.1 ร่าง เสนอผ่าน CR-09 (สถานะ Proposed) ตัวเลขที่ยังไม่มีเจ้าของยืนยันมีป้าย Q-xx ในชื่อ scenario
+# v1.0 CR-09 อนุมัติ 31 ต.ค. 2569 (EV-047) เข้า Baseline B4 ป้าย Q-xx ที่เหลือในไฟล์นี้คือคำถามที่ปิดแล้ว (ที่มาของตัวเลข) ข้อความของ scenario ไม่เปลี่ยน
+# eval set ที่ AC ใช้: eval/qa.jsonl, eval/reschedule.jsonl, eval/injection.jsonl รุ่น 1.0
 # ภาษา: ไทย ยกเว้นคำสำคัญของ Gherkin และ ID
 # AC ของกล่อง AI (LLM แต่งคำตอบ) วัดบน eval set ใน eval/ Then สองชั้น: บรรทัดที่บอก "เด็ดขาด" ผิดข้อเดียวไม่ผ่าน บรรทัดที่บอกสัดส่วนวัดเป็นจำนวนใน N
 # AC ของกล่องกฎ (รั้ว เครื่องมือ BR-06 บันทึก ปุ่มหยุด) เขียนแบบเดิม รันด้วย test ปกติ

@@ -1,8 +1,8 @@
-// หน้าหลักของบ้านพร้อม R1: UC-07 จองงาน (เลือกช่าง ยืนยัน ผล), UC-08 ยกเลิกการจอง, UC-09 สถานะงานและงานของช่าง
+// หน้าหลักของบ้านพร้อม R1: UC-07 จองงาน (เลือกช่าง ยืนยัน ผล), UC-08 ยกเลิกการจอง, UC-09 สถานะงานและงานของช่าง, UC-14 ผู้ช่วย (CR-09)
 // ตัวอย่างใช้ลูกค้า ที่อยู่ และช่างคงที่ (การเข้าสู่ระบบของลูกค้า UC-02 และ sign-in ของแอปช่าง UC-01 เลื่อนไป R2 ดู README "R1 release scope"
 // ส่วนการเลือกที่อยู่ให้บริการยังรอ Q-29) แถบเมนูด้านบนเป็นปุ่มนำทาง ไม่ต้องมี REQ รองรับ
 import { useState } from 'react'
-import { api as realApi, jobStatusApi as realJobStatusApi, cancelApi as realCancelApi } from './api/client.js'
+import { api as realApi, jobStatusApi as realJobStatusApi, cancelApi as realCancelApi, assistantApi as realAssistantApi } from './api/client.js'
 import TechnicianPicker from './pages/TechnicianPicker.jsx'
 import ConfirmBooking from './pages/ConfirmBooking.jsx'
 import BookingResult from './pages/BookingResult.jsx'
@@ -10,12 +10,13 @@ import TechnicianJobs from './pages/TechnicianJobs.jsx'
 import JobStatus from './pages/JobStatus.jsx'
 import CancelBooking from './pages/CancelBooking.jsx'
 import CancelResult from './pages/CancelResult.jsx'
+import AssistantChat from './pages/AssistantChat.jsx'
 
 const VIEWS = [
-  ['book', 'จองงาน'], ['status', 'สถานะงาน'], ['cancel', 'ยกเลิกการจอง'], ['technician', 'งานของช่าง'],
+  ['book', 'จองงาน'], ['status', 'สถานะงาน'], ['cancel', 'ยกเลิกการจอง'], ['technician', 'งานของช่าง'], ['assistant', 'ผู้ช่วย'],
 ]
 
-export default function App({ api = realApi, jobStatusApi = realJobStatusApi, cancelApi = realCancelApi,
+export default function App({ api = realApi, jobStatusApi = realJobStatusApi, cancelApi = realCancelApi, assistantApi = realAssistantApi,
   customerId = 1, addressId = 1, technicianId = 1, initialView = 'book' }) {
   const [view, setView] = useState(initialView)
   const [held, setHeld] = useState(null)
@@ -52,6 +53,7 @@ export default function App({ api = realApi, jobStatusApi = realJobStatusApi, ca
       {view === 'cancel' && !cancelled && <CancelBooking api={cancelApi} customerId={customerId} onCancelled={setCancelled} />}
       {view === 'cancel' && cancelled && <CancelResult result={cancelled} onHome={() => { setCancelled(null); setView('book') }} />}
       {view === 'technician' && <TechnicianJobs api={jobStatusApi} technicianId={technicianId} />}
+      {view === 'assistant' && <AssistantChat api={assistantApi} customerId={customerId} />}
     </main>
   )
 }

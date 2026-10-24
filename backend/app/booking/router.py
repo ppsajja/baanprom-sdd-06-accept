@@ -1,4 +1,5 @@
 """POST /slots/{id}/hold, GET /deposit-quote, POST /bookings, GET /jobs/{id}, GET /jobs/{id}/technician-view (plan.md ข้อ 4)
+CR-09: POST /jobs/{id}/reschedule (REQ-FN-056, BR-06) API เลื่อนนัดของลูกค้า ผู้ช่วยของ UC-14 ใช้ฟังก์ชันเดียวกัน
 CR-07: REQ-SEC-011 (409 hold_limit), REQ-QA-010 (202 payment_pending), REQ-SEC-010 (technician-view 403 และบันทึก)
 log ผ่าน log_event เท่านั้น (REQ-OP-005 บรรทัดที่ 3)"""
 from datetime import datetime
@@ -127,3 +128,24 @@ def technician_view(job_id: int, technician_id: int, db: Session = Depends(get_d
     # GAP-22: เดิม log ทั้ง dict (ชื่อลูกค้าหลุดลง log ได้ เบอร์ถูกกรอง) ตอนนี้ log เฉพาะรหัส
     log_event(log, "technician_view", technician_id=technician_id, job_id=job.id)
     return data
+
+
+class RescheduleIn(BaseModel):
+    customer_id: int
+    new_slot_id: int
+
+
+@router.post("/jobs/{job_id}/reschedule")
+def reschedule(job_id: int, body: RescheduleIn, db: Session = Depends(get_db), now: datetime = Depends(get_now)):
+    # รองรับ REQ-FN-056, BR-06 (CR-09, AC-14-16) และ REQ-SEC-010: ไม่ใช่งานของลูกค้าคนนี้ ตอบ 403 และบันทึก
+    job = audit.job_of_customer(db, job_id, body.customer_id, "POST /jobs/{job_id}/reschedule", now)
+    slot = db.get(TimeSlot, body.new_slot_id)
+    if not slot:
+        raise HTTPException(404, "ไม่พบช่วงเวลา")
+    try:
+        record = service.reschedule_job(db, job, slot, now)
+    except service.RescheduleRejected as e:
+        return JSONResponse({"reason": e.reason, "message": e.message}, status_code=409)
+    log_event(log, "job_rescheduled", job_id=job.id, customer_id=body.customer_id, slot_id=slot.id)
+    return {"job_id": job.id, "slot_id": job.slot_id, "scheduled_start": job.scheduled_start.isoformat(),
+            "from_start": record.from_start.isoformat(), "reschedules_used": service.reschedules_used(db, job)}

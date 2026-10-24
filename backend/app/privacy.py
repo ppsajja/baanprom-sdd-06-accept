@@ -33,6 +33,8 @@ import json
 ALLOWED_LOG_FIELDS = frozenset({
     "event", "endpoint", "method", "status", "ms", "job_id", "customer_id", "technician_id",
     "slot_id", "rule", "amount", "result", "count", "attempt", "reason", "actor_role", "actor_id",
+    # CR-09 (REQ-AI-013): รหัสและรุ่นของผู้ช่วย ไม่มีข้อความที่ลูกค้าพิมพ์และไม่มีคำตอบ (ข้อความเหล่านั้นอยู่ในบันทึกคำตอบที่ปิดบังแล้ว)
+    "conversation_id", "turn_id", "proposal_id", "ticket_id", "intent", "tool", "guard", "prompt_version", "model_version",
 })
 
 
@@ -50,3 +52,17 @@ def log_event(logger: logging.Logger, event: str, **fields) -> dict:
     line = PHONE_PATTERN.sub("[phone]", json.dumps(record, ensure_ascii=False, default=str))
     logger.info(line)
     return record
+
+
+# ---- CR-09 REQ-AI-013 (Q-57): ปิดบังข้อมูลส่วนบุคคลในข้อความที่ลูกค้าพิมพ์ ก่อนเก็บในบันทึกคำตอบและบันทึกการกระทำ ----
+# ลูกค้าพิมพ์เบอร์โทร อีเมล หรือเลขบัตรประชาชนของตัวเองมาได้ ระบบไม่เก็บค่าเหล่านั้น (SH-05 ใน EV-047)
+EMAIL_PATTERN = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+THAI_ID_PATTERN = re.compile(r"\b\d[- ]?\d{4}[- ]?\d{5}[- ]?\d{2}[- ]?\d\b")
+LONG_DIGITS_PATTERN = re.compile(r"\d{9,}")
+
+
+def mask_text(text: str) -> str:
+    text = EMAIL_PATTERN.sub("[email]", text)
+    text = THAI_ID_PATTERN.sub("[id]", text)
+    text = PHONE_PATTERN.sub("[phone]", text)
+    return LONG_DIGITS_PATTERN.sub("[number]", text)

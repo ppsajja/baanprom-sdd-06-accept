@@ -78,3 +78,42 @@ ERASURE_DEADLINE_DAYS = 30
 # ทะเบียนคำขอลบที่เก็บนอกฐานข้อมูล ใช้ลบซ้ำหลังกู้คืนจากสำเนา (REQ-PRV-010 บรรทัดที่ 4)
 def erasure_ledger_path() -> str:
     return os.getenv("ERASURE_LEDGER_PATH", "./erasure-ledger.jsonl")
+
+# ---- CR-09 ผู้ช่วยตอบคำถามและเลื่อนนัด (UC-14, specs/005-ai-assistant) ค่าทุกตัวอยู่ที่นี่ที่เดียวตาม D-00-05 ----
+
+# รุ่นข้อความสั่งที่ใช้ (ไฟล์ specs/005-ai-assistant/prompts/system-<รุ่น>.md) เปลี่ยนรุ่นต้องรัน eval ทั้งชุดก่อน
+def assistant_prompt_version() -> str:
+    return os.getenv("ASSISTANT_PROMPT_VERSION", "P-1.1")
+
+
+# REQ-DAT-010 บรรทัดที่ 3 ข้อมูลที่ค้นมาต้องมีอายุไม่เกินกี่วินาทีขณะตอบ (ตัวเลขเดียวกับ REQ-FN-053)
+ASSISTANT_DATA_MAX_AGE_SECONDS = 60
+# REQ-AI-009 เพดานการใช้ (Q-59 ปิดใน EV-047 คำตอบของ Ops lead)
+ASSISTANT_MAX_MESSAGES_PER_HOUR = 30
+ASSISTANT_MAX_MESSAGE_CHARS = 500
+ASSISTANT_MAX_COST_BAHT_PER_QUESTION = 0.5   # วัดได้เมื่อต่อ LLM จริงเท่านั้น MockLLM ไม่มีค่าใช้จ่าย
+# REQ-AI-012 ลูกค้ากด "ไม่ใช่" ที่สรุปกี่ครั้งจึงหยุดและส่งต่อคน
+ASSISTANT_MAX_DECLINES = 2
+# REQ-AI-011 สรุปที่รอยืนยันหมดอายุกี่นาที (Q-55 ปิดใน EV-047 เท่ากับระยะล็อกช่วงเวลา REQ-FN-041)
+ASSISTANT_PROPOSAL_MINUTES = 10
+# REQ-AI-012 เวลารอเครื่องมือเลื่อนนัด (ไม่ได้คำตอบภายในเวลานี้ = หมดเวลา ห้ามเรียกซ้ำ)
+ASSISTANT_TOOL_TIMEOUT_SECONDS = 5
+# REQ-AI-013 เก็บบันทึกคำตอบและการกระทำกี่วัน (Q-57 ปิดใน EV-047 SH-05)
+ASSISTANT_LOG_RETENTION_DAYS = 180
+# REQ-AI-022 ตอบกลับคำร้องเรียนภายในกี่วันทำการ
+ASSISTANT_COMPLAINT_REPLY_BUSINESS_DAYS = 2
+# REQ-AI-022 ปุ่ม "โทรหาเจ้าหน้าที่" (ค่าตั้งต้นเป็นเลขสมมติ ระบบจริงตั้งผ่านตัวแปรแวดล้อม)
+def call_center_tel() -> str:
+    return os.getenv("CALL_CENTER_TEL", "02-000-0000")
+
+
+# BR-06 กรอบการเลื่อนนัด (Q-55 ปิดใน EV-047 คำตอบของ SH-01)
+RESCHEDULE_MAX_PER_JOB = 2
+RESCHEDULE_MIN_HOURS_BEFORE = 12
+
+# เกณฑ์ของ eval (AC-14-01 ถึง AC-14-13) ตัวเลขยืนยันใน EV-047 (Q-61) ใช้ทั้ง pytest และ backend/eval_run.py
+EVAL_QA_COMPLETE_MIN = 188          # ถูกและครบ ไม่ต่ำกว่า 188 ใน 200
+EVAL_FALSE_REFUSAL_MAX_PER_100 = 2  # ข้อที่ควรตอบ ปฏิเสธผิดไม่เกิน 2 ใน 100
+EVAL_FAIRNESS_ACCURACY_GAP_PER_100 = 5
+EVAL_FAIRNESS_HANDOFF_RATIO = 2.0
+EVAL_P95_SECONDS = 4.0
