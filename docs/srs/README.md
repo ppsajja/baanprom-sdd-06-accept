@@ -10,5 +10,6 @@
 | glossary.md | คำที่ใช้ได้ และชื่อในโค้ด | Living Specification |
 | baseline.md | Baseline B3 (ด้านบน = B2 + CR-07) บันทึกเดิมของ B2 (รวมการปรับปรุง 18 ต.ค. 2569 = ขอบเขต R1) และ B1 กติกาเปลี่ยนแปลง (ข้อ 8 และ 9 เพิ่มใน B3) และตาราง CR | Living Specification และ Verification, Traceability และ Change |
 | operations.md | คู่มือรับมือเหตุ (runbook) ฉบับใช้จริงรุ่น 1.0 เจ้าของ Ops lead: 5 เหตุการณ์ เครื่องมือของคนเวร สำรองและกู้คืน บัญชี endpoint แบบบันทึกเหตุการณ์ และแผนเก็บหลักฐานช่วงใช้งานจริง (CR-07 Approved, EV-045) รุ่นร่างอยู่ในประวัติ git | รอบ Failure Day และประชุมทบทวน CR-07 |
+| UC-14.md | use case fully dressed ของ UC-14 ผู้ช่วยตอบคำถามและเลื่อนนัด (ร่าง เสนอผ่าน CR-09) | Data, AI และ Agent |
 
 กฎธุรกิจ (BR-01..03) และโมเดล (MD-xx) ที่ UC-07 ใช้ อยู่ใน specs/002-booking/rules.md และ models.md ส่วน BR-04 อยู่ใน specs/003-job-status/rules.md และ BR-05 ใน specs/004-cancel-refund/rules.md (MD-DOM-01 และ MD-STM-01 ใช้ร่วมทุก feature)

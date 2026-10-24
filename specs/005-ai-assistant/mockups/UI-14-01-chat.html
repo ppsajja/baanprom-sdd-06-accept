@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI-14-01 แชตผู้ช่วย (ร่าง)</title>
+<!-- mockup ร่างจาก Studio บทเรียน Data, AI และ Agent ยังไม่ได้ตกลงกับ SH-01 และหัวหน้า call center
+     รองรับ REQ-AI-020, REQ-AI-011, REQ-AI-022, REQ-AI-012 รายการ "ต้องตรง" อยู่ใน spec.md ส่วน 12
+     ข้อมูลในหน้านี้เป็นตัวอย่าง ห้ามนำไปใส่ตายตัวในโค้ด (AGENTS.md กฎข้อ 10) -->
+<style>
+  body { font-family: sans-serif; background: #f1f5f9; margin: 0; padding: 16px; color: #0f172a; }
+  .state { max-width: 420px; margin: 0 auto 24px; background: #fff; border: 1px solid #cbd5e1; padding: 12px; }
+  .label { font-size: 12px; color: #64748b; margin-bottom: 8px; }
+  .bot { background: #ecfeff; border: 1px solid #99f6e4; padding: 8px; margin: 6px 0; }
+  .me { background: #e2e8f0; padding: 8px; margin: 6px 0 6px 40px; }
+  .src { font-size: 12px; color: #475569; }
+  .row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  button { border: 1px solid #0f766e; background: #fff; color: #0f766e; padding: 6px 10px; }
+  button.primary { background: #0f766e; color: #fff; }
+  .summary td { padding: 2px 8px 2px 0; }
+  .wait { border: 1px dashed #94a3b8; color: #64748b; padding: 6px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<section class="state">
+  <div class="label">สถานะ 1 เริ่มบทสนทนา</div>
+  <div class="bot">ข้อความแรกจากระบบ: บอกว่าเป็นผู้ช่วยอัตโนมัติ และบอก 5 เรื่องที่ตอบได้</div>
+  <div class="row"><input placeholder="พิมพ์คำถาม" style="flex:1"><button class="primary">ส่ง</button></div>
+  <div class="row"><button>คุยกับเจ้าหน้าที่</button></div>
+</section>
+
+<section class="state">
+  <div class="label">สถานะ 2 ตอบพร้อมที่มา</div>
+  <div class="me">ช่างมายัง</div>
+  <div class="bot">ช่างกำลังเดินทางไปหาคุณแล้วค่ะ งาน #1024 นัดไว้ 14:00 น.
+    <div class="src">ที่มา: สถานะงาน #1024 อัปเดต 09:52</div>
+    <div class="row"><button>คำตอบนี้ไม่ถูกต้อง</button></div>
+  </div>
+  <div class="row"><input placeholder="พิมพ์คำถาม" style="flex:1"><button class="primary">ส่ง</button></div>
+  <div class="row"><button>คุยกับเจ้าหน้าที่</button></div>
+</section>
+
+<section class="state">
+  <div class="label">สถานะ 3 สรุปเลื่อนนัดรอยืนยัน (ระดับ 2)</div>
+  <div class="me">ขอเลื่อนงาน 1024 เป็นวันที่ 7 ต.ค. 14:00</div>
+  <div class="bot">
+    <table class="summary">
+      <tr><td>งาน</td><td>#1024</td></tr>
+      <tr><td>วันเวลาเดิม</td><td>5 ต.ค. 14:00</td></tr>
+      <tr><td>วันเวลาใหม่</td><td>7 ต.ค. 14:00</td></tr>
+      <tr><td>ช่าง</td><td>ประสิทธิ์ (คนเดิม)</td></tr>
+    </table>
+    <div class="row"><button class="primary">ยืนยันเลื่อนนัด</button><button>ไม่ใช่</button></div>
+    <div class="wait">รอ Q-55: ค่าธรรมเนียมการเลื่อน (ถ้ามี) ห้ามสร้างจนกว่าจะได้คำตอบ</div>
+  </div>
+  <div class="row"><button>คุยกับเจ้าหน้าที่</button></div>
+</section>
+
+<section class="state">
+  <div class="label">สถานะ 4 ผู้ช่วยปิด (REQ-AI-022)</div>
+  <div class="bot">ข้อความจากระบบ: ผู้ช่วยปิดชั่วคราว ให้ติดต่อเจ้าหน้าที่</div>
+  <div class="row"><button class="primary">โทรหาเจ้าหน้าที่</button></div>
+</section>
+
+</body>
+</html>

@@ -101,6 +101,7 @@ tag: B1 | date: 2569-09-06 | approved-by: SH-01 (เจ้าของ), กล�
 | CR-05 | นำ SPEC-JOB-STATUS (UC-09) เข้า B2 เพิ่ม REQ-FN-050 ถึง 053 AC-09-01 ถึง 10 UI-09-01, 02 และปิด F-08 (AC ของ REQ-DAT-002) | Approved 18 ต.ค. 2569 (SH-01) ทำครบแล้ว เข้า B2 (ปรับปรุง) เงื่อนไข Q-31 ก่อนเปิดใช้จริง |
 | CR-06 | นำ SPEC-CANCEL (UC-08) เข้า B2 เพิ่ม REQ-FN-054, 055, REQ-IF-010, REQ-DAT-003 AC-08-01 ถึง 06 UI-08-01, 02 และให้การยกเลิกทุกทางคืนเงินผ่าน gateway (ปิด F-12) | Approved 18 ต.ค. 2569 (SH-01, Dev lead) ทำครบแล้ว เข้า B2 (ปรับปรุง) เงื่อนไข Q-34 ก่อนเปิดใช้จริง |
 | CR-07 | เพิ่มข้อกำหนดข้ามทุก feature 9 ข้อ (OP, QA, SEC, PRV, CMP) เป็น Constraint กลางรุ่น 1.1 จากการทบทวนเหตุการณ์รอบ Failure Day พร้อม MU-01, STRIDE TH-01 ถึง 11 และร่าง runbook (docs/srs/operations.md) ประชุมทบทวนเพิ่ม REQ-SEC-012 แก้ AC-09-06 และปิด POST /jobs/{id}/cancel | Approved 24 ต.ค. 2569 (SH-01, Ops lead, SH-05, Dev lead) ทำครบแล้ว เข้า B3 (specs/002-booking/changes/CR-07.md) สถานะเดิมในรอบ Failure Day: Proposed ไม่มีโค้ดหรือ test เปลี่ยน |
+| CR-09 | นำผู้ช่วยตอบคำถามและเลื่อนนัด (UC-14, specs/005-ai-assistant) เข้าสู่การพิจารณา เพิ่ม REQ-DAT-010, REQ-AI-005 ถึง 013, 020 ถึง 022, REQ-FN-056, BR-06, AC-14-01 ถึง 16, UI-14-01 และไฟล์กลางส่วน 7 "AI" (รุ่น 1.2) ข้ามเลข CR-08 เพราะหน้าบทเรียน RE in One Line ใช้ CR-08 เป็นตัวอย่างสมมติ | Proposed รอ SH-01, SH-05, Ops lead, Dev lead คำถามเปิด Q-55 ถึง Q-63 (specs/005-ai-assistant/changes/CR-09.md) |
 
 ## บันทึกตอนประกาศ B1 (ยกมาจาก repo baanprom-sdd-02-build)
 
