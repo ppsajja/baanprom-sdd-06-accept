@@ -76,9 +76,9 @@ commit ที่ 2 (หลังอนุมัติ)
 | docs/srs/stakeholders.md | เพิ่มบทบาท หัวหน้า call center (ยังไม่มีรหัส SH) | เจ้าของผู้ช่วย (Q-60) |
 | prompt-log.md | เพิ่ม #73 ถึง #78 | ทุกคำสั่งและการตัดสินของรอบนี้ |
 
-ดู diff ทั้งหมดของรอบอนุมัติ: `git diff cr09-proposed b4 --stat` และของทั้งบท: `git diff cr09-proposed~1 b4 --stat`
+ดู diff ทั้งหมดของรอบอนุมัติ: `git diff origin/checkpoint/cr09-proposed origin/checkpoint/b4 --stat` และของทั้งบท: `git diff origin/checkpoint/cr09-proposed~1 origin/checkpoint/b4 --stat`
 
-> แท็ก (เช่น cr09-proposed, b4) ใช้ได้เมื่อ clone repo นี้ ถ้าสร้างด้วยปุ่ม Use this template บน GitHub จะไม่ได้ประวัติ commit และแท็กมาด้วย
+> จุดในประวัติ (เช่น checkpoint/cr09-proposed, checkpoint/b4) เป็น branch ชื่อขึ้นต้น checkpoint/ เปิดได้ด้วย `git checkout checkpoint/ชื่อ` หลัง clone ถ้าสร้าง repo ของกลุ่มด้วยปุ่ม Use this template ให้ติ๊ก Include all branches
 
 
 ## งานของบทนี้ที่นักศึกษาต้องทำต่อ
@@ -113,7 +113,7 @@ git push -u origin main
 ```
 
 `git remote set-url origin` เปลี่ยนปลายทางของ push จาก repo ของผู้สอนเป็น repo ของกลุ่ม (ต้องสร้าง repo เปล่าบน GitHub ไว้ก่อน)
-ถ้าอยากเริ่มจากสภาพหลัง Studio ที่ยังไม่อนุมัติ ใช้ `git checkout cr09-proposed` แล้วสร้าง branch ของกลุ่มจากจุดนั้น
+ถ้าอยากเริ่มจากสภาพหลัง Studio ที่ยังไม่อนุมัติ ใช้ `git checkout checkpoint/cr09-proposed` แล้วสร้าง branch ของกลุ่มจากจุดนั้น
 
 ## ทีม
 
@@ -179,7 +179,7 @@ npm run dev
 - Python 3.11 และ 3.12: บรรทัดสุดท้าย `97 passed, 1 skipped, 1 warning` (ข้าม 1 คือ AC-07-10 แถว R3 ที่รอ Q-14)
 - หน้าจอ: `Test Files 21 passed (21)` และ `Tests 37 passed (37)`
 - eval: `prompt P-1.1: 20/20 เกณฑ์ผ่าน`
-- ถ้าเปิด commit ที่ 1 (`git checkout cr09-proposed`) จะได้ 66 passed, 1 skipped และ 31 passed เท่า repo 05 เพราะยังไม่มีโค้ดของผู้ช่วย
+- ถ้าเปิด commit ที่ 1 (`git checkout checkpoint/cr09-proposed`) จะได้ 66 passed, 1 skipped และ 31 passed เท่า repo 05 เพราะยังไม่มีโค้ดของผู้ช่วย
 
 ## สิ่งที่รู้อยู่แล้วว่ายังไม่ใช่ของจริง
 
