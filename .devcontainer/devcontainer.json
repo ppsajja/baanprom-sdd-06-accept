@@ -1,5 +1,5 @@
 {
-  "name": "baanprom-swreqspec",
+  "name": "baanprom-sdd-06-accept",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "customizations": {
     "vscode": {
